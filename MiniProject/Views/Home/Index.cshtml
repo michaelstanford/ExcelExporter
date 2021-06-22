@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div id="upload-controls">
+    <input type="file" class="form-control-file" id="files" name="files" />
+    <input type="button" class="btn btn-primary" id="Upload" value="Upload" class="btn btn-primary" />
+</div>
+
+<div id="file-data"></div>
+    
+<div id="export-type-selection">
+    <label for="exportAs">Export As: </label>
+    <select class="form-control" id="exportAs" name="exportAs">
+        <option value="json">JSON</option>
+        <option value="xml">XML</option>
+        <option value="delimiter">Delimiter</option>
+    </select>
+</div>
+
+    <div id="sort-selection">
+        <label for="column-headers">Sort By:</label>
+        <select class="form-control" id="column-headers" name="column-headers"></select>
+    </div>
+    
+
+<div id="delimiter-controls">
+    <label for="delimiter">Delimiter</label>
+    <input type="text" class="form-control"id="delimiter" value=","/>
+</div>
+    
+    <input type="button" class="btn btn-primary" id="export-button" value="Export" class="btn btn-primary">
+
+    <div id="exportResult">
+        <pre id="preformatted"></pre>
+    </div>
+
+    @section scripts{
+
+        <script>
+
+            $(document).ready(function () {
+
+                $('#delimiter-controls').hide();
+                $('#export-type-selection').hide();
+                $('#sort-selection').hide();
+                $('#export-button').hide();
+
+                $('#Upload').click(function () {
+                    uploadFile();
+                });
+
+                $('#export-button').click(function() {
+                    exportFile();
+                });
+
+                $('#exportAs').change(function () {
+                    if (this.value === "delimiter") {
+                        $("#delimiter-controls").show();
+                    } else {
+                        $("#delimiter-controls").hide();
+                    }
+                });
+            });
+        </script>
+    }
+
